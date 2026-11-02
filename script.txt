@@ -1,0 +1,112 @@
+/**
+ * ET PERFUMES - Interactive Luxury Effects & Particle Canvas
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // 1. Gold Dust Particle Canvas Animation
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedX = Math.random() * 0.4 - 0.2;
+      this.speedY = Math.random() * -0.5 - 0.1;
+      this.opacity = Math.random() * 0.6 + 0.2;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.y < 0 || this.x < 0 || this.x > width) {
+        this.reset();
+        this.y = height;
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = '#d4af37';
+      ctx.fill();
+    }
+  }
+
+  const particlesArray = Array.from({ length: 45 }, () => new Particle());
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
+    particlesArray.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
+
+  // 2. Interactive Product Filter Logic
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const productCards = document.querySelectorAll('.product-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active state
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const filterValue = button.getAttribute('data-filter');
+
+      productCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        
+        if (filterValue === 'all' || category === filterValue) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0) scale(1)';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px) scale(0.95)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+
+  // 3. Subtle Parallax Effect on Ambient Glows
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+
+    const glow1 = document.querySelector('.glow-1');
+    const glow2 = document.querySelector('.glow-2');
+
+    if (glow1 && glow2) {
+      glow1.style.transform = `translate(${mouseX * 30}px, ${mouseY * 30}px)`;
+      glow2.style.transform = `translate(${-mouseX * 30}px, ${-mouseY * 30}px)`;
+    }
+  });
+
+});

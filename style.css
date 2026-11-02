@@ -1,0 +1,443 @@
+/* ==========================================================================
+   ET PERFUMES - Luxury Dark & Gold Styling
+   ========================================================================== */
+
+:root {
+  --bg-dark: #0a0806;
+  --bg-card: rgba(22, 18, 14, 0.65);
+  --gold-primary: #d4af37;
+  --gold-light: #f3e5ab;
+  --gold-dark: #aa7c11;
+  --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+  --text-main: #f0ede6;
+  --text-muted: #a69c8d;
+  --font-serif: 'Cinzel', 'Playfair Display', serif;
+  --font-sans: 'Tajawal', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Effects & Patterns */
+.bg-gradient-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 20%, #1c150b 0%, #0a0806 80%);
+  z-index: -3;
+}
+
+.arabic-pattern-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(var(--gold-primary) 0.5px, transparent 0.5px);
+  background-size: 30px 30px;
+  opacity: 0.07;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#particles-canvas {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ambient-glow {
+  position: fixed;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(50px);
+  z-index: -1;
+}
+.glow-1 { top: -100px; right: -100px; }
+.glow-2 { bottom: -100px; left: -100px; }
+
+/* Header Styling */
+.main-header {
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(10px);
+  background: rgba(10, 8, 6, 0.7);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Social Icons (Left) */
+.social-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.social-icon {
+  color: var(--gold-light);
+  font-size: 1.1rem;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  background: rgba(212, 175, 55, 0.03);
+}
+
+.social-icon:hover {
+  color: var(--bg-dark);
+  background: var(--gold-gradient);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Brand Logo (Right) */
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  direction: ltr;
+}
+
+.logo-mark {
+  position: relative;
+  width: 48px; height: 48px;
+  border: 1px solid var(--gold-primary);
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(45deg);
+  background: rgba(10, 8, 6, 0.9);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.logo-letters {
+  transform: rotate(-45deg);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-sparkle {
+  position: absolute;
+  font-size: 0.6rem;
+  color: var(--gold-light);
+  top: 2px; right: 2px;
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tagline {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.sub-title {
+  color: var(--gold-primary);
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.main-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(180deg, #ffffff 0%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Filter Navigation Bar */
+.filter-navigation {
+  margin: 2.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-container {
+  display: flex;
+  gap: 1rem;
+  background: rgba(20, 16, 12, 0.8);
+  padding: 0.5rem;
+  border-radius: 50px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  padding: 0.7rem 1.8rem;
+  border-radius: 30px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-btn .btn-text {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.filter-btn .btn-sub {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background: var(--gold-gradient);
+  color: #0a0806;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Products Section & Cards */
+.products-section {
+  max-width: 1250px;
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.product-card:hover {
+  transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.badge-tag {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: var(--gold-gradient);
+  color: #0a0806;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+/* Stage & Image Effects */
+.bottle-stage {
+  height: 260px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.dramatic-light {
+  position: absolute;
+  top: -20%; left: 50%;
+  transform: translateX(-50%);
+  width: 120%; height: 140%;
+  background: radial-gradient(ellipse at top, rgba(255, 235, 170, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.glow-orb {
+  position: absolute;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.bottle-img {
+  max-height: 220px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
+  z-index: 1;
+}
+
+.product-card:hover .bottle-img {
+  transform: scale(1.08) translateY(-5px);
+  filter: drop-shadow(0 20px 30px rgba(212, 175, 55, 0.25));
+}
+
+/* Card Content Info */
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.perfume-category {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: var(--gold-primary);
+  margin-bottom: 0.3rem;
+}
+
+.perfume-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+  color: #ffffff;
+}
+
+.perfume-notes {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.perfume-desc-ar {
+  font-size: 0.85rem;
+  color: #c2b8a3;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  min-height: 2.5em;
+}
+
+/* Card Footer & Price Button */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.price-tag {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.price-tag .currency {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.explore-btn {
+  background: transparent;
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-light);
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.explore-btn:hover {
+  background: var(--gold-gradient);
+  color: #0a0806;
+  border-color: transparent;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Footer Styling */
+.main-footer {
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  text-align: center;
+  background: rgba(5, 4, 3, 0.9);
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  color: var(--gold-primary);
+  margin-bottom: 0.5rem;
+}
+
+.footer-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .main-header { padding: 1rem 1.5rem; }
+  .header-container { flex-direction: column-reverse; gap: 1rem; }
+  .main-title { font-size: 1.8rem; }
+  .filter-container { width: 100%; justify-content: space-around; }
+  .filter-btn { padding: 0.5rem 1rem; }
+}
